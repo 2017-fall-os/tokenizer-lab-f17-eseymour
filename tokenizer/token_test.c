@@ -35,15 +35,15 @@ char * toklen_result() {
   #undef MESSAGE
   #define MESSAGE "size_t toklen(const char *, char) returned a value different than expected"
 
-  mu_assert(MESSAGE, toklen("Hello my dog's name is Darwin.", ' ') == 5);
-  mu_assert(MESSAGE, toklen("my dog's name is Darwin.", ' ') == 2);
-  mu_assert(MESSAGE, toklen("dog's name is Darwin.", ' ') == 5);
-  mu_assert(MESSAGE, toklen("name is Darwin.", ' ') == 4);
-  mu_assert(MESSAGE, toklen("is Darwin.", ' ') == 2);
-  mu_assert(MESSAGE, toklen("Darwin.", ' ') == 7);
-  mu_assert(MESSAGE, toklen("Hello   World!    ", ' ') == 5);
-  mu_assert(MESSAGE, toklen("World!    ", ' ') == 6);
-  mu_assert(MESSAGE, toklen("HelloWorld", ' ') == 10);
+  mu_assert(MESSAGE, toklen(DARWIN, delim) == 5);
+  mu_assert(MESSAGE, toklen(DARWIN + 6, delim) == 2);
+  mu_assert(MESSAGE, toklen(DARWIN + 9, delim) == 5);
+  mu_assert(MESSAGE, toklen(DARWIN + 15, delim) == 4);
+  mu_assert(MESSAGE, toklen(DARWIN + 20, delim) == 2);
+  mu_assert(MESSAGE, toklen(DARWIN + 23, delim) == 7);
+  mu_assert(MESSAGE, toklen(HW_SPACE + 5, delim) == 5);
+  mu_assert(MESSAGE, toklen(HW_SPACE + 13, delim) == 6);
+  mu_assert(MESSAGE, toklen(HW_NOSPACE + 1, delim) == 10);
 
   return 0;
 }
@@ -54,15 +54,15 @@ char * tokcpy_result() {
 
   char buf[100];
 
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "Hello my dog's name is Darwin.", ' '), "Hello") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "my dog's name is Darwin.", ' '), "my") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "dog's name is Darwin.", ' '), "dog's") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "name is Darwin.", ' '), "name") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "is Darwin.", ' '), "is") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "Darwin.", ' '), "Darwin.") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "Hello   World!    ", ' '), "Hello") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "World!    ", ' '), "World!") == 0);
-  mu_assert(MESSAGE, strcmp(tokcpy(buf, "HelloWorld", ' '), "HelloWorld") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, DARWIN, delim), "Hello") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, DARWIN + 6, delim), "my") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, DARWIN + 9, delim), "dog's") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, DARWIN + 15, delim), "name") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, DARWIN + 20, delim), "is") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, DARWIN + 23, delim), "Darwin.") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, HW_SPACE + 5, delim), "Hello") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, HW_SPACE + 13, delim), "World!") == 0);
+  mu_assert(MESSAGE, strcmp(tokcpy(buf, HW_NOSPACE + 1, delim), "HelloWorld") == 0);
 
   return 0;
 }
