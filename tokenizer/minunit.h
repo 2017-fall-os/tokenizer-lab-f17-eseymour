@@ -1,12 +1,15 @@
 #ifndef MUNIT_H
 #define MUNIT_H
-/* A short unit testing framework I found online:
- * http://www.jera.com/techinfo/jtns/jtn002.html */
 
- #include <stdio.h>
+#include <stdio.h>
 
 #define xstr(s) str(s)
 #define str(s) #s
+
+
+/* A short unit testing framework I found online:
+ * http://www.jera.com/techinfo/jtns/jtn002.html
+ * I made a few modifications to print the line and file */
 
 #define mu_assert(message, test) do { if (!(test)) \
                                 return __FILE__"(" xstr(__LINE__) "): " \
